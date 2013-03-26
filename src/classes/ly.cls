@@ -1,4 +1,13 @@
 global class ly
 {
-//    global Map<String, Object> get(url);
+    global static Map<String, Object> get( String url )
+    {
+        System.HttpRequest request = new System.HttpRequest();
+        request.setEndpoint( url );
+        request.setMethod( 'GET' );
+
+        System.HttpResponse response = new Http().send( request );
+
+        return (Map<String, Object>)System.JSON.deserializeUntyped( response.getBody() );
+    }
 }
